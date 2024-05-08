@@ -15,18 +15,19 @@ export const useAuthentication = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
 
-  // Limpeza para tirar resquícios de funções
-  // Lidar com vazamento de memória
+  // Hook de limpeza para tirar resquícios de funções
   const [cancelled, setCancelled] = useState(false);
 
   const auth = getAuth();
 
+  // Função para lidar com vazamento de memória
   function checkIfIsCancelled() {
     if (cancelled) {
       return;
     }
   }
 
+  // Função de Registro
   const createUser = async (data) => {
     checkIfIsCancelled();
 
@@ -65,6 +66,38 @@ export const useAuthentication = () => {
     }
   };
 
+  // Função de Logout
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
+  };
+
+  // Função de Login
+  const login = async (data) => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      console.log(error);
+
+      let systemErrorMessage;
+
+      if (error.message.includes("auth/invalid-credential")) {
+        systemErrorMessage = "Usuário ou Senha Inválidos";
+      } else {
+        systemErrorMessage =
+          "Ocorreu um erro, tente novamente mais tarde!";
+      }
+
+      setError(systemErrorMessage);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -74,5 +107,7 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
+    logout,
+    login,
   };
 };

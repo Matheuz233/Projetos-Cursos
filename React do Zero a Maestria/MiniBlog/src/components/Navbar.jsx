@@ -7,7 +7,7 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const { user } = useAuthValue();
 
-  console.log(user);
+  const { logout } = useAuthentication(); 
 
   return (
     <nav className={styles.navbar}>
@@ -76,6 +76,13 @@ const Navbar = () => {
             Sobre
           </NavLink>
         </li>
+
+        {/* Usuário Autenticado */}
+        {user && (
+          <li>
+            <button onClick={logout}>Sair</button>
+          </li>
+        )}
       </ul>
     </nav>
   );
