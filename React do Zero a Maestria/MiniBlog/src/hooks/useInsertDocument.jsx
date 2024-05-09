@@ -33,23 +33,24 @@ export const useInsertDocument = (docCollection) => {
   };
 
   // Inserir Documento no Banco
-  const insertDocument = async (document) => {
+  const insertedDocument = async (document) => {
     checkCancelBeforeDispatch({
       type: "LOADING",
     });
     try {
-      const newDocument = { ...document, createAt: Timestamp.now };
+      const newDocument = { ...document, createAt: Timestamp.now()};
 
-      const insertDocument = await addDoc(
+      const insertedDocument = await addDoc(
         collection(db, docCollection),
         newDocument
       );
 
       checkCancelBeforeDispatch({
         type: "INSERTED_DOC",
-        payload: insertDocument,
+        payload: insertedDocument,
       });
     } catch (error) {
+      console.log(error)
       checkCancelBeforeDispatch({
         type: "ERROR",
         payload: error.message,
@@ -61,5 +62,5 @@ export const useInsertDocument = (docCollection) => {
     return () => setCancelled(true);
   }, []);
 
-  return { insertDocument, response };
+  return { insertedDocument, response };
 };

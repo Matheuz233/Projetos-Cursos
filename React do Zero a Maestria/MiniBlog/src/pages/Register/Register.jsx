@@ -1,4 +1,4 @@
-import { useAuthentication } from "../../../hooks/useAuthentication";
+import { useAuthentication } from "../../hooks/useAuthentication";
 import styles from "./Register.module.css";
 
 import { useState, useEffect } from "react";
@@ -28,16 +28,16 @@ const Register = () => {
       return;
     }
 
-    const res = await createUser(user)
+    const res = await createUser(user);
 
-    console.log(res)
+    console.log(res);
   };
 
   useEffect(() => {
-    if(authError) {
-      setError(authError)
+    if (authError) {
+      setError(authError);
     }
-  }, [authError])
+  }, [authError]);
 
   return (
     <div className={styles.register}>
@@ -91,7 +91,11 @@ const Register = () => {
           />
         </label>
         {!loading && <button className="btn">Cadastrar</button>}
-        {loading && <button className="btn" disabled>Aguarde...</button>}
+        {loading && (
+          <button className="btn" disabled>
+            Aguarde...
+          </button>
+        )}
       </form>
     </div>
   );
