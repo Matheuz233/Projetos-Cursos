@@ -75,7 +75,7 @@ textarea {
   font-size: 1em;
 }
 
-.btn.btn_dark {
+.btn.btn-dark {
   background-color: #000;
   border-radius: 0;
 }
@@ -93,7 +93,7 @@ textarea {
   color: #fff;
 }
 
-.btn.btn.btn-outline:hover {
+.btn.btn-outline:hover {
   background-color: #000;
 }
 

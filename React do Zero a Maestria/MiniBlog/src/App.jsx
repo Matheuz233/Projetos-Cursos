@@ -22,6 +22,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Search from "./pages/Search/Search";
 
 function App() {
   // Lógica de Chamada do Usário e Monitoramento de Usuário
@@ -49,6 +50,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/search" element={<Search />} />
               {/* Bloqueando Páginas que Precisam de Autenticação */}
               <Route
                 path="/login"
